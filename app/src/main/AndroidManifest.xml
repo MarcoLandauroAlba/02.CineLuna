@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="pm.miyashiro.team.cineluna">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--  LOS PERMISOS SON PARA TRABAJAR CON LA API DE MOVIES Y TRAER IMAGENES  -->
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -13,7 +15,7 @@
             android:name=".AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".NavigationActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".LoginActivity"
