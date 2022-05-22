@@ -5,7 +5,9 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import pm.miyashiro.team.cineluna.adapters.MovieListAdapter
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas
@@ -32,7 +34,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)                                       //VIEW BINDING
         setContentView(binding.root)                                                                //VIEW BINDING
 
-
+        val header = binding.navMain.getHeaderView(0)
+        header.findViewById<TextView>(R.id.txNameHeader).setText(nombreDelUsuario)
 
         actualizarPantalla()
 
@@ -45,17 +48,35 @@ class MainActivity : AppCompatActivity() {
         binding.btnSiguiente.setOnClickListener{
             funcionalidadesBotonSiguiente()
         }
+
+        binding.navMain.setNavigationItemSelectedListener {
+            it.setChecked(true)
+
+            when(it.itemId){
+                R.id.aboutUs -> hacerAlgo()
+                R.id.pelis ->hacerAlgo2()
+            }
+
+            binding.drawerLayoutMain.closeDrawers()
+            true
+        }
     }
 
+    override fun onBackPressed() {
+        if(binding.drawerLayoutMain.isDrawerOpen(GravityCompat.START)){
+            binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
+        }else{
+            super.onBackPressed()
+        }
+    }
 
+    private fun hacerAlgo2() {
+        TODO("Not yet implemented")
+    }
 
-
-
-
-
-
-
-
+    private fun hacerAlgo() {
+        TODO("Not yet implemented")
+    }
 
 
     private fun actualizarPantalla() {
