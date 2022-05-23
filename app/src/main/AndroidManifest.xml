@@ -12,9 +12,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CineLuna">
         <activity
-            android:name=".AboutActivity"
-            android:exported="false" />
-        <activity
             android:name=".MainActivity"
             android:exported="false"
             android:configChanges="orientation|screenSize"/>

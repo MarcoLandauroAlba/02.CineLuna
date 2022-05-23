@@ -4,22 +4,22 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.core.content.ContextCompat
-import pm.miyashiro.team.cineluna.databinding.ActivityLoginBinding                                  //VIEW BINDING
+import pm.miyashiro.team.cineluna.databinding.ActivityLoginBinding                                                          //VIEW BINDING
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityLoginBinding                                              //VIEW BINDING
+    private lateinit var binding: ActivityLoginBinding                                                                      //VIEW BINDING
 
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        // Ocultar text bar antes de settea el contexto
+        // Ocultar tool bar antes de settear el contexto
         supportActionBar?.hide()
 
-        binding = ActivityLoginBinding.inflate(layoutInflater)                                      //VIEW BINDING
-        setContentView(binding.root)                                                                //VIEW BINDING
+        binding = ActivityLoginBinding.inflate(layoutInflater)                                                              //VIEW BINDING
+        setContentView(binding.root)                                                                                        //VIEW BINDING
 
         // LISTENERS
         binding.btnLogin.setOnClickListener{
@@ -28,10 +28,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun btnLoginPresionado() {
-        if(binding.etNombre.text.toString() == ""){             // Si el editText esta vacio        // VB
-            binding.etNombre.hint = "Debe ingresar un nombre!"                                      // VB
-            binding.tvNombre.text = "Es obligatorio ingresar su nombre:"                            // VB
-            binding.tvNombre.setTextColor(ContextCompat.getColor(this, R.color.red))                                // VB
+        if(binding.etNombre.text.toString() == ""){                                         // Si el editText esta vacio    // VB
+            binding.etNombre.hint = "Debe ingresar un nombre!"                                                              // VB
+            binding.tvNombre.text = "Es obligatorio ingresar su nombre:"                                                    // VB
+            binding.tvNombre.setTextColor(ContextCompat.getColor(this, R.color.red))                               // VB
         }else{
             Intent(this, MainActivity::class.java).apply {
                 this.putExtra("Nombre", binding.etNombre.text.toString())
