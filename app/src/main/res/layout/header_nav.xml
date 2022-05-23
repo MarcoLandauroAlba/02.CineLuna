@@ -7,13 +7,14 @@
     android:fitsSystemWindows="true">
 
     <TextView
+        android:fontFamily="monospace"
+        android:textSize="30sp"
         android:id="@+id/txNameHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="24dp"
         android:text="TextView"
-        android:textSize="30sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -29,5 +30,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/pan" />
+        app:srcCompat="@drawable/_8441577_291501188272633_1558387436919193600_n" />
 </androidx.constraintlayout.widget.ConstraintLayout>

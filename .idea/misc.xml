@@ -22,11 +22,16 @@
         <entry key="..\:/Users/Matias/Documents/2022-1/ProgramacionMovil/Trabajo2/02.CineLuna/app/src/main/res/layout/view_movie_none.xml" value="0.3625" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.37" />
         <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.37" />
+        <entry key="app/src/main/res/layout-land/fargment_sobrenosotros.xml" value="0.25044091710758376" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.38958333333333334" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.37604166666666666" />
         <entry key="app/src/main/res/layout/activity_navigation.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fargment_sobrenosotros.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_detallepelicula.xml" value="0.29583333333333334" />
+        <entry key="app/src/main/res/layout/fragment_listapeliculas.xml" value="0.16726277669270842" />
         <entry key="app/src/main/res/layout/fragment_options.xml" value="0.38958333333333334" />
+        <entry key="app/src/main/res/layout/header_nav.xml" value="0.29583333333333334" />
         <entry key="app/src/main/res/layout/view_movie.xml" value="0.25" />
         <entry key="app/src/main/res/layout/view_movie_none.xml" value="0.29583333333333334" />
       </map>

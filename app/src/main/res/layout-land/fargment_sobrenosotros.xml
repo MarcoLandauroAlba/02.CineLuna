@@ -4,25 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <ImageView
         android:layout_margin="2dp"
         android:id="@+id/ivFoto1"
         android:layout_width="100dp"
         android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/_3270526_136620217096953_391130970073795505_o" />
-    <TextView
-        android:fontFamily="monospace"
-        android:textSize="20sp"
-        android:layout_margin="2dp"
-        android:id="@+id/txtDatos1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ivFoto1"
-        android:text="Marco Landauro Alba (20191063)"
-        android:textAlignment="center" />
     <ImageView
         android:layout_margin="2dp"
         android:id="@+id/ivFoto2"
@@ -30,8 +20,28 @@
         android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtDatos1"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/_8441577_291501188272633_1558387436919193600_n" />
+    <ImageView
+        android:layout_margin="2dp"
+        android:id="@+id/ivFoto3"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/whatsapp_image_2022_05_20_at_8_26_15_pm" />
+    <TextView
+        android:fontFamily="monospace"
+        android:textSize="20sp"
+        android:layout_margin="2dp"
+        android:id="@+id/txtDatos1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/ivFoto1"
+        android:text="Marco Landauro Alba (20191063)"
+        android:textAlignment="center" />
     <TextView
         android:fontFamily="monospace"
         android:textSize="20sp"
@@ -39,18 +49,11 @@
         android:id="@+id/txtDatos2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ivFoto2"
-        android:text="Franco Marquez Velasquez (20191218)"
-        android:textAlignment="center" />
-    <ImageView
-        android:layout_margin="2dp"
-        android:id="@+id/ivFoto3"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtDatos2"
-        app:srcCompat="@drawable/whatsapp_image_2022_05_20_at_8_26_15_pm" />
+        app:layout_constraintTop_toBottomOf="@id/txtDatos1"
+        android:text="Franco Marquez Velasquez (20191218)"
+        android:textAlignment="center" />
     <TextView
         android:fontFamily="monospace"
         android:textSize="20sp"
@@ -58,21 +61,23 @@
         android:id="@+id/txtDatos3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/ivFoto3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtDatos2"
         android:text="Franco Marquez Velasquez (20193655)"
         android:textAlignment="center" />
+
     <Button
         android:fontFamily="monospace"
         android:textSize="20sp"
         android:id="@+id/butRegresar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_margin="16dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="16dp"
         android:text="Regresar" />
-
 
 
 
