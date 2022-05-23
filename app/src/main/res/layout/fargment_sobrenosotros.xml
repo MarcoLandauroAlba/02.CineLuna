@@ -5,36 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="148dp"
+        android:layout_height="83dp"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/pan" />
+
     <LinearLayout
 
         android:id="@+id/llInformacion"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.243">
+        app:layout_constraintTop_toBottomOf="@+id/imageView3">
 
         <TextView
             android:id="@+id/txtDatos"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Marco Landauro Alba (20191063)" />
+            android:text="Marco Landauro Alba (20191063)"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/txtDatos2"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Franco Marquez Velasquez (20191218)" />
+            android:text="Franco Marquez Velasquez (20191218)"
+            android:textAlignment="center" />
 
         <TextView
             android:id="@+id/txtDatos3"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Franco Marquez Velasquez (20193655)" />
+            android:text="Franco Marquez Velasquez (20193655)"
+            android:textAlignment="center" />
     </LinearLayout>
 
     <LinearLayout

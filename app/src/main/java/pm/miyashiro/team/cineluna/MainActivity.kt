@@ -26,7 +26,6 @@ import pm.miyashiro.team.cineluna.fragments.SobreNosotrosFragment
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding                                               //VIEW BINDING
-    private lateinit var nombreDelUsuario : String
     val fragments : List<Fragment> = listOf(PeliculaDetalleFragment(),ListaPeliculasFragment(), SobreNosotrosFragment())
 
 
@@ -35,9 +34,6 @@ class MainActivity : AppCompatActivity() {
         // Se recuperan los datos del intent
         datosIntent()
         // Se ingresa el nombre del usuario correctamente
-
-        supportActionBar?.title = "Hola " + NombreUsuario + "!"
-
         binding = ActivityMainBinding.inflate(layoutInflater)                                       //VIEW BINDING
         setContentView(binding.root)                                                                //VIEW BINDING
         val header = binding.navMain.getHeaderView(0)
@@ -46,6 +42,14 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager.beginTransaction()
             .add(R.id.fragcont,fragments[1],"lista")
             .commit()
+
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = "Hola " + NombreUsuario + "!"
+        var toggle  =
+            ActionBarDrawerToggle(this,binding.drawerLayoutMain,binding.toolbar,R.string.drawer_open,R.string.drawer_close)
+
+        binding.drawerLayoutMain.addDrawerListener(toggle)
+        toggle.syncState()
 
         binding.navMain.setCheckedItem(R.id.pelis)
 
@@ -74,14 +78,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pressItemPel() {
+        if(supportFragmentManager.findFragmentById(R.id.fragcont)!=fragments[1]){
         supportActionBar?.title = "Hola " + NombreUsuario + "!"
         supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .show(fragments[1])
-            .commit()
+            .commit()}
+        else{
+            showError()
+        }
     }
 
     private fun pressItemAboutUs() {
+        if(supportFragmentManager.findFragmentById(R.id.fragcont)!=fragments[2]){
         supportActionBar?.title = "¿Quiénes somos?"
         supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
@@ -89,6 +98,9 @@ class MainActivity : AppCompatActivity() {
             .add(R.id.fragcont,fragments[2],"aboutus")
             .addToBackStack("aboutus")
             .commit()
+        }else{
+            showError()
+        }
     }
 
 
@@ -97,7 +109,7 @@ class MainActivity : AppCompatActivity() {
         DatosUsuario.NombreUsuario = intent.extras?.getString("Nombre").toString()
     }
     private fun showError() {
-        Toast.makeText(this,"OCURRIO UN ERROR",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"Pagina actual",Toast.LENGTH_LONG).show()
     }
 
 
