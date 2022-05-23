@@ -5,9 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import pm.miyashiro.team.cineluna.R
+import androidx.fragment.app.FragmentTransaction
+import pm.miyashiro.team.cineluna.classes.controller.DatosUsuario
 import pm.miyashiro.team.cineluna.databinding.FargmentSobrenosotrosBinding
 
 class SobreNosotrosFragment : Fragment() {
@@ -21,6 +24,8 @@ class SobreNosotrosFragment : Fragment() {
                 navmain = activity?.findViewById(R.id.navMain)
                 navmain?.setCheckedItem(R.id.pelis)
                 parentFragmentManager.popBackStack()
+                (activity as AppCompatActivity).supportActionBar?.title = "Hola " + DatosUsuario.NombreUsuario + "!"
+
             }
         })
     }
@@ -35,9 +40,8 @@ class SobreNosotrosFragment : Fragment() {
             parentFragmentManager.popBackStack()
             navmain = activity?.findViewById(R.id.navMain)
             navmain?.setCheckedItem(R.id.pelis)
+            (activity as AppCompatActivity).supportActionBar?.title = "Hola " + DatosUsuario.NombreUsuario + "!"
         }
         return binding.root
     }
-
-
 }

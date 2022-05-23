@@ -11,9 +11,10 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
-import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import pm.miyashiro.team.cineluna.adapters.MovieListAdapter
+import pm.miyashiro.team.cineluna.classes.controller.DatosUsuario
+import pm.miyashiro.team.cineluna.classes.controller.DatosUsuario.Companion.NombreUsuario
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas.Companion.listaPeliculas
 import pm.miyashiro.team.cineluna.databinding.ActivityMainBinding
@@ -35,12 +36,12 @@ class MainActivity : AppCompatActivity() {
         datosIntent()
         // Se ingresa el nombre del usuario correctamente
 
-        supportActionBar?.title = "Hola " + nombreDelUsuario + "!"
+        supportActionBar?.title = "Hola " + NombreUsuario + "!"
 
         binding = ActivityMainBinding.inflate(layoutInflater)                                       //VIEW BINDING
         setContentView(binding.root)                                                                //VIEW BINDING
         val header = binding.navMain.getHeaderView(0)
-        header.findViewById<TextView>(R.id.txNameHeader).setText(nombreDelUsuario)
+        header.findViewById<TextView>(R.id.txNameHeader).setText(NombreUsuario)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fragcont,fragments[1],"lista")
@@ -59,6 +60,7 @@ class MainActivity : AppCompatActivity() {
             binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
             true
         }
+
     }
 
 
@@ -72,7 +74,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pressItemPel() {
-        supportActionBar?.title = "Hola " + nombreDelUsuario + "!"
+        supportActionBar?.title = "Hola " + NombreUsuario + "!"
         supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .show(fragments[1])
@@ -80,7 +82,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pressItemAboutUs() {
-        supportActionBar?.title = "Quienes somos?"
+        supportActionBar?.title = "¿Quiénes somos?"
         supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .hide(fragments[1])
@@ -89,8 +91,10 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
+
+
     private fun datosIntent() {
-        nombreDelUsuario = intent.extras?.getString("Nombre").toString()
+        DatosUsuario.NombreUsuario = intent.extras?.getString("Nombre").toString()
     }
     private fun showError() {
         Toast.makeText(this,"OCURRIO UN ERROR",Toast.LENGTH_LONG).show()
