@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -27,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding                                               //VIEW BINDING
     val fragments : List<Fragment> = listOf(PeliculaDetalleFragment(),ListaPeliculasFragment(), SobreNosotrosFragment())
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,10 +78,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pressItemPel() {
+        var clayout : ConstraintLayout? = null
+        clayout = findViewById(R.id.clayout)
+        if(clayout != null) {
+            if (clayout.visibility != View.VISIBLE) {
+                clayout.visibility = View.VISIBLE
+            }
+        }
+
         if(supportFragmentManager.findFragmentById(R.id.fragcont)!=fragments[1]){
         supportActionBar?.title = "Hola " + NombreUsuario + "!"
-        supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
+
             .show(fragments[1])
             .commit()}
         else{
@@ -92,10 +101,10 @@ class MainActivity : AppCompatActivity() {
     private fun pressItemAboutUs() {
         if(supportFragmentManager.findFragmentById(R.id.fragcont)!=fragments[2]){
         supportActionBar?.title = "¿Quiénes somos?"
-        supportFragmentManager.popBackStack()
+       // supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .hide(fragments[1])
-            .add(R.id.fragcont,fragments[2],"aboutus")
+            .replace(R.id.fragcont,fragments[2],"aboutus")
             .addToBackStack("aboutus")
             .commit()
         }else{
