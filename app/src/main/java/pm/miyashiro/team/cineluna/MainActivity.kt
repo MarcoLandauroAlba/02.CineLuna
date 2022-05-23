@@ -8,6 +8,7 @@ import android.view.View
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
@@ -27,7 +28,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding                                               //VIEW BINDING
     val fragments : List<Fragment> = listOf(PeliculaDetalleFragment(),ListaPeliculasFragment(), SobreNosotrosFragment())
-    val FragmentActual : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -78,6 +78,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun pressItemPel() {
+        var clayout : ConstraintLayout? = null
+        clayout = findViewById(R.id.clayout)
+        if(clayout != null) {
+            if (clayout.visibility != View.VISIBLE) {
+                clayout.visibility = View.VISIBLE
+            }
+        }
+
         if(supportFragmentManager.findFragmentById(R.id.fragcont)!=fragments[1]){
         supportActionBar?.title = "Hola " + NombreUsuario + "!"
             supportFragmentManager.popBackStack()
