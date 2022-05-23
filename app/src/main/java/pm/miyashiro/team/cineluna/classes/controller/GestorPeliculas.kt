@@ -20,8 +20,6 @@ class GestorPeliculas {
             )
         ))
 
-        var nombreUsuario : String = ""
-
         fun obtenerPeliculas(numeroPagina : String) {
             val apiService = MovieAPIService.getRetrofit().create(APIthemoviedb::class.java)
             apiService.getMovieListDiscover(numeroPagina).enqueue(object :
