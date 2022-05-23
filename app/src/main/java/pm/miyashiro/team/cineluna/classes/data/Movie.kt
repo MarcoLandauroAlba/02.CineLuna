@@ -6,7 +6,8 @@ data class Movie (
     @SerializedName(value="backdrop_path")      var backdrop_path       : String,
     @SerializedName(value="original_title")     var original_title      : String,
     @SerializedName(value="poster_path")        var poster_path         : String,
-    @SerializedName(value="vote_average")       var vote_average        : Double
+    @SerializedName(value="vote_average")       var vote_average        : Double,
+    @SerializedName(value="overview")           var overview            : String
 )
 
 /*

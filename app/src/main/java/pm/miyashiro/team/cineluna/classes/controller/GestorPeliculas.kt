@@ -15,7 +15,8 @@ class GestorPeliculas {
             "/A3bsT0m1um6tvcmlIGxBwx9eAxn.jpg",
             "ninguno1",
             "/neMZH82Stu91d3iqvLdNQfqPPyl.jpg",
-            0.0
+            0.0,
+            "a"
             )
         ))
 
@@ -35,7 +36,8 @@ class GestorPeliculas {
                             "/A3bsT0m1um6tvcmlIGxBwx9eAxn.jpg",
                             "ninguno2",
                             "/neMZH82Stu91d3iqvLdNQfqPPyl.jpg",
-                            0.0
+                            0.0,
+                            "a"
                         )
                     ))
                 }

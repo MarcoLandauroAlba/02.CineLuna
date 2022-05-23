@@ -5,21 +5,28 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import pm.miyashiro.team.cineluna.adapters.MovieListAdapter
+import pm.miyashiro.team.cineluna.classes.controller.DatosUsuario
+import pm.miyashiro.team.cineluna.classes.controller.DatosUsuario.Companion.NombreUsuario
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas.Companion.listaPeliculas
 import pm.miyashiro.team.cineluna.databinding.ActivityMainBinding
+import pm.miyashiro.team.cineluna.fragments.ListaPeliculasFragment
+import pm.miyashiro.team.cineluna.fragments.PeliculaDetalleFragment
+import pm.miyashiro.team.cineluna.fragments.SobreNosotrosFragment
 
 
 class MainActivity : AppCompatActivity() {
 
-    var numeroPagina : Int = 1
     private lateinit var binding: ActivityMainBinding                                               //VIEW BINDING
-    private lateinit var nombreDelUsuario : String
-    private lateinit var adapterRV : MovieListAdapter
-
+    val fragments : List<Fragment> = listOf(PeliculaDetalleFragment(),ListaPeliculasFragment(), SobreNosotrosFragment())
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,99 +34,85 @@ class MainActivity : AppCompatActivity() {
         // Se recuperan los datos del intent
         datosIntent()
         // Se ingresa el nombre del usuario correctamente
-        supportActionBar?.title = "Hola " + nombreDelUsuario + "!"
-
         binding = ActivityMainBinding.inflate(layoutInflater)                                       //VIEW BINDING
         setContentView(binding.root)                                                                //VIEW BINDING
+        val header = binding.navMain.getHeaderView(0)
+        header.findViewById<TextView>(R.id.txNameHeader).setText(NombreUsuario)
 
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragcont,fragments[1],"lista")
+            .commit()
 
+        setSupportActionBar(binding.toolbar)
+        supportActionBar?.title = "Hola " + NombreUsuario + "!"
+        var toggle  =
+            ActionBarDrawerToggle(this,binding.drawerLayoutMain,binding.toolbar,R.string.drawer_open,R.string.drawer_close)
 
-        actualizarPantalla()
+        binding.drawerLayoutMain.addDrawerListener(toggle)
+        toggle.syncState()
 
+        binding.navMain.setCheckedItem(R.id.pelis)
 
+        binding.navMain.setNavigationItemSelectedListener {
+            it.setChecked(true)
 
-        // LISTENERS
-        binding.btnAnterior.setOnClickListener{
-            funcionalidadesBotonAnterior()
-        }
-        binding.btnSiguiente.setOnClickListener{
-            funcionalidadesBotonSiguiente()
-        }
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-    private fun actualizarPantalla() {
-        binding.rvMovieList.visibility = View.GONE
-        binding.viewLoading.visibility = View.VISIBLE
-        binding.btnAnterior.isEnabled = true
-        if(numeroPagina==1){
-            binding.btnAnterior.isEnabled = false
-        }
-        binding.tvNumeroPagina.text = "Pagina "+numeroPagina
-        inicializarRecyclerView()
-    }
-
-
-
-    private fun inicializarRecyclerView(){
-        GestorPeliculas.obtenerPeliculas(numeroPagina.toString())
-
-        Handler(Looper.getMainLooper()).postDelayed({
-            adapterRV = MovieListAdapter(this, listaPeliculas.results) {
-                // AQUI PONER FUNCIONALIDAD PARA IR A OTRAS PANTALLAS
-                Toast.makeText(this,it.original_title,Toast.LENGTH_LONG).show()
+            when(it.itemId){
+                R.id.aboutUs -> pressItemAboutUs()
+                R.id.pelis ->pressItemPel()
             }
-            binding.rvMovieList.layoutManager = LinearLayoutManager(this)
-            binding.rvMovieList.adapter = adapterRV
-            binding.rvMovieList.visibility = View.VISIBLE
-            binding.viewLoading.visibility = View.GONE
-        }, 3000)
+
+            binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
+            true
+        }
+
     }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private fun funcionalidadesBotonSiguiente() {
-        numeroPagina++
-        actualizarPantalla()
-    }
-    private fun funcionalidadesBotonAnterior() {
-        if(numeroPagina>1){
-            numeroPagina--
-            actualizarPantalla()
+    override fun onBackPressed() {
+        if(binding.drawerLayoutMain.isDrawerOpen(GravityCompat.START)){
+            binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
+        }else{
+            super.onBackPressed()
         }
     }
+
+    private fun pressItemPel() {
+        if(supportFragmentManager.findFragmentById(R.id.fragcont)!=fragments[1]){
+        supportActionBar?.title = "Hola " + NombreUsuario + "!"
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .show(fragments[1])
+            .commit()}
+        else{
+            showError()
+        }
+    }
+
+    private fun pressItemAboutUs() {
+        if(supportFragmentManager.findFragmentById(R.id.fragcont)!=fragments[2]){
+        supportActionBar?.title = "¿Quiénes somos?"
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .hide(fragments[1])
+            .add(R.id.fragcont,fragments[2],"aboutus")
+            .addToBackStack("aboutus")
+            .commit()
+        }else{
+            showError()
+        }
+    }
+
+
+
     private fun datosIntent() {
-        nombreDelUsuario = intent.extras?.getString("Nombre").toString()
+        DatosUsuario.NombreUsuario = intent.extras?.getString("Nombre").toString()
     }
     private fun showError() {
-        Toast.makeText(this,"OCURRIO UN ERROR",Toast.LENGTH_LONG).show()
+        Toast.makeText(this,"Pagina actual",Toast.LENGTH_LONG).show()
     }
+
+
+
 }
+
