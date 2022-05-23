@@ -9,7 +9,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import pm.miyashiro.team.cineluna.R
 import pm.miyashiro.team.cineluna.adapters.MovieListAdapter
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas.Companion.listaPeliculas
@@ -65,7 +68,23 @@ class ListaPeliculasFragment:Fragment() {
         Handler(Looper.getMainLooper()).postDelayed({
             adapterRV = MovieListAdapter(thiscontext, listaPeliculas.results) {
                 // AQUI PONER FUNCIONALIDAD PARA IR A OTRAS PANTALLAS
-                Toast.makeText(thiscontext,it.original_title, Toast.LENGTH_LONG).show()
+                val bundle = Bundle()
+                val NombrePelicula = it.original_title
+                val DetallePelicula = it.overview
+                val FondoPelicula = it.backdrop_path
+                val Foto = it.poster_path
+                bundle.putString("Nombre", NombrePelicula)
+                bundle.putString("Detalle", DetallePelicula)
+                bundle.putString("Fondo", FondoPelicula)
+                bundle.putString("Foto", Foto)
+
+                val Detalle = PeliculaDetalleFragment()
+                Detalle.arguments = bundle
+                val transaction : FragmentTransaction = requireFragmentManager().beginTransaction()
+                transaction.add(R.id.fragcont, Detalle)
+                transaction.commit()
+
+                //Toast.makeText(thiscontext,it.overview, Toast.LENGTH_LONG).show()
             }
             binding.rvMovieList.layoutManager = LinearLayoutManager(thiscontext)
             binding.rvMovieList.adapter = adapterRV

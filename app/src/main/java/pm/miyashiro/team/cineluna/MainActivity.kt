@@ -18,6 +18,7 @@ import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas.Companion.l
 import pm.miyashiro.team.cineluna.databinding.ActivityMainBinding
 import pm.miyashiro.team.cineluna.fragments.ListaPeliculasFragment
 import pm.miyashiro.team.cineluna.fragments.PeliculaDetalleFragment
+import pm.miyashiro.team.cineluna.fragments.SobreNosotrosFragment
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +27,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding                                               //VIEW BINDING
     private lateinit var nombreDelUsuario : String
     private lateinit var adapterRV : MovieListAdapter
-    val fragments : List<Fragment> = listOf(PeliculaDetalleFragment(),ListaPeliculasFragment())
+    val fragments : List<Fragment> = listOf(PeliculaDetalleFragment(),ListaPeliculasFragment(), SobreNosotrosFragment())
     var ft : FragmentTransaction = supportFragmentManager.beginTransaction()
 
 
@@ -78,7 +79,8 @@ class MainActivity : AppCompatActivity() {
     private fun hacerAlgo() {
         supportActionBar?.title = "Quienes somos?"
         ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.fragcont,fragments[0]).commit()
+        ft.hide(fragments[1])
+        ft.add(R.id.fragcont,fragments[2]).commit()
     }
 
 
