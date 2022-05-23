@@ -6,6 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import com.bumptech.glide.Glide
@@ -15,17 +17,31 @@ import pm.miyashiro.team.cineluna.databinding.FragmentDetallepeliculaBinding
 class PeliculaDetalleFragment : Fragment(){
     private var _binding : FragmentDetallepeliculaBinding? = null
     private val binding get() = _binding!!
+    private var clayout : ConstraintLayout? = null
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        activity?.onBackPressedDispatcher?.addCallback(this , object: OnBackPressedCallback(true){
+            override fun handleOnBackPressed(){
+                parentFragmentManager.popBackStack()
+                clayout?.visibility = View.VISIBLE
+                parentFragmentManager.popBackStack()
+            }
+        })
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        clayout = activity?.findViewById(R.id.clayout)
         _binding = FragmentDetallepeliculaBinding.inflate(inflater,container,false)
         binding.butRegresar.setOnClickListener {
-            val a = ListaPeliculasFragment()
-            val transaction : FragmentTransaction = requireFragmentManager().beginTransaction()
-            transaction.remove(this).commit()
+            parentFragmentManager.popBackStack()
+            clayout?.visibility = View.VISIBLE
         }
         return binding.root
     }

@@ -11,6 +11,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import pm.miyashiro.team.cineluna.adapters.MovieListAdapter
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas
@@ -23,12 +24,9 @@ import pm.miyashiro.team.cineluna.fragments.SobreNosotrosFragment
 
 class MainActivity : AppCompatActivity() {
 
-    var numeroPagina : Int = 1
     private lateinit var binding: ActivityMainBinding                                               //VIEW BINDING
     private lateinit var nombreDelUsuario : String
-    private lateinit var adapterRV : MovieListAdapter
     val fragments : List<Fragment> = listOf(PeliculaDetalleFragment(),ListaPeliculasFragment(), SobreNosotrosFragment())
-    var ft : FragmentTransaction = supportFragmentManager.beginTransaction()
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,20 +42,23 @@ class MainActivity : AppCompatActivity() {
         val header = binding.navMain.getHeaderView(0)
         header.findViewById<TextView>(R.id.txNameHeader).setText(nombreDelUsuario)
 
-        ft.replace(R.id.fragcont,fragments[1]).commit()
+        supportFragmentManager.beginTransaction()
+            .add(R.id.fragcont,fragments[1],"lista")
+            .commit()
+
+        binding.navMain.setCheckedItem(R.id.pelis)
 
         binding.navMain.setNavigationItemSelectedListener {
             it.setChecked(true)
 
             when(it.itemId){
-                R.id.aboutUs -> hacerAlgo()
-                R.id.pelis ->hacerAlgo2()
+                R.id.aboutUs -> pressItemAboutUs()
+                R.id.pelis ->pressItemPel()
             }
 
             binding.drawerLayoutMain.closeDrawer(GravityCompat.START)
             true
         }
-
     }
 
 
@@ -70,20 +71,23 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun hacerAlgo2() {
+    private fun pressItemPel() {
         supportActionBar?.title = "Hola " + nombreDelUsuario + "!"
-        ft = supportFragmentManager.beginTransaction()
-        ft.replace(R.id.fragcont,fragments[1]).commit()
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .show(fragments[1])
+            .commit()
     }
 
-    private fun hacerAlgo() {
+    private fun pressItemAboutUs() {
         supportActionBar?.title = "Quienes somos?"
-        ft = supportFragmentManager.beginTransaction()
-        ft.hide(fragments[1])
-        ft.add(R.id.fragcont,fragments[2]).commit()
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction()
+            .hide(fragments[1])
+            .add(R.id.fragcont,fragments[2],"aboutus")
+            .addToBackStack("aboutus")
+            .commit()
     }
-
-
 
     private fun datosIntent() {
         nombreDelUsuario = intent.extras?.getString("Nombre").toString()
@@ -91,5 +95,8 @@ class MainActivity : AppCompatActivity() {
     private fun showError() {
         Toast.makeText(this,"OCURRIO UN ERROR",Toast.LENGTH_LONG).show()
     }
+
+
+
 }
 
