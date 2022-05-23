@@ -27,7 +27,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding                                               //VIEW BINDING
     val fragments : List<Fragment> = listOf(PeliculaDetalleFragment(),ListaPeliculasFragment(), SobreNosotrosFragment())
-
+    val FragmentActual : Int = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,8 +80,9 @@ class MainActivity : AppCompatActivity() {
     private fun pressItemPel() {
         if(supportFragmentManager.findFragmentById(R.id.fragcont)!=fragments[1]){
         supportActionBar?.title = "Hola " + NombreUsuario + "!"
-        supportFragmentManager.popBackStack()
+            supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
+
             .show(fragments[1])
             .commit()}
         else{
@@ -92,10 +93,10 @@ class MainActivity : AppCompatActivity() {
     private fun pressItemAboutUs() {
         if(supportFragmentManager.findFragmentById(R.id.fragcont)!=fragments[2]){
         supportActionBar?.title = "¿Quiénes somos?"
-        supportFragmentManager.popBackStack()
+       // supportFragmentManager.popBackStack()
         supportFragmentManager.beginTransaction()
             .hide(fragments[1])
-            .add(R.id.fragcont,fragments[2],"aboutus")
+            .replace(R.id.fragcont,fragments[2],"aboutus")
             .addToBackStack("aboutus")
             .commit()
         }else{
