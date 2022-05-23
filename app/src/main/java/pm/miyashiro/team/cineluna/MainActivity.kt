@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import pm.miyashiro.team.cineluna.adapters.MovieListAdapter
+import pm.miyashiro.team.cineluna.classes.controller.DatosUsuario
+import pm.miyashiro.team.cineluna.classes.controller.DatosUsuario.Companion.NombreUsuario
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas
 import pm.miyashiro.team.cineluna.classes.controller.GestorPeliculas.Companion.listaPeliculas
 import pm.miyashiro.team.cineluna.databinding.ActivityMainBinding
@@ -25,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
     var numeroPagina : Int = 1
     private lateinit var binding: ActivityMainBinding                                               //VIEW BINDING
-    private lateinit var nombreDelUsuario : String
     private lateinit var adapterRV : MovieListAdapter
     val fragments : List<Fragment> = listOf(PeliculaDetalleFragment(),ListaPeliculasFragment(), SobreNosotrosFragment())
     var ft : FragmentTransaction = supportFragmentManager.beginTransaction()
@@ -37,12 +38,12 @@ class MainActivity : AppCompatActivity() {
         datosIntent()
         // Se ingresa el nombre del usuario correctamente
 
-        supportActionBar?.title = "Hola " + nombreDelUsuario + "!"
+        supportActionBar?.title = "Hola " + NombreUsuario + "!"
 
         binding = ActivityMainBinding.inflate(layoutInflater)                                       //VIEW BINDING
         setContentView(binding.root)                                                                //VIEW BINDING
         val header = binding.navMain.getHeaderView(0)
-        header.findViewById<TextView>(R.id.txNameHeader).setText(nombreDelUsuario)
+        header.findViewById<TextView>(R.id.txNameHeader).setText(NombreUsuario)
 
         ft.replace(R.id.fragcont,fragments[1]).commit()
 
@@ -71,8 +72,9 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun hacerAlgo2() {
-        supportActionBar?.title = "Hola " + nombreDelUsuario + "!"
+        supportActionBar?.title = "Hola " + NombreUsuario + "!"
         ft = supportFragmentManager.beginTransaction()
+        ft.show(fragments[1])
         ft.replace(R.id.fragcont,fragments[1]).commit()
     }
 
@@ -86,7 +88,7 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun datosIntent() {
-        nombreDelUsuario = intent.extras?.getString("Nombre").toString()
+        DatosUsuario.NombreUsuario = intent.extras?.getString("Nombre").toString()
     }
     private fun showError() {
         Toast.makeText(this,"OCURRIO UN ERROR",Toast.LENGTH_LONG).show()

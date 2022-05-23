@@ -26,6 +26,7 @@ class ListaPeliculasFragment:Fragment() {
     var numeroPagina : Int = 1
     private lateinit var adapterRV : MovieListAdapter
     private lateinit var thiscontext : Context
+    var usuario = "base"
 
 
     override fun onCreateView(
@@ -52,6 +53,12 @@ class ListaPeliculasFragment:Fragment() {
         }
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        if(arguments != null){
+            usuario = requireArguments().getString("NombreUsuario").toString()
+        }
+    }
     private fun actualizarPantalla() {
         binding.rvMovieList.visibility = View.GONE
         binding.viewLoading.visibility = View.VISIBLE
@@ -73,10 +80,12 @@ class ListaPeliculasFragment:Fragment() {
                 val DetallePelicula = it.overview
                 val FondoPelicula = it.backdrop_path
                 val Foto = it.poster_path
+
                 bundle.putString("Nombre", NombrePelicula)
                 bundle.putString("Detalle", DetallePelicula)
                 bundle.putString("Fondo", FondoPelicula)
                 bundle.putString("Foto", Foto)
+                bundle.putString("Usuario", usuario)
 
                 val Detalle = PeliculaDetalleFragment()
                 Detalle.arguments = bundle
